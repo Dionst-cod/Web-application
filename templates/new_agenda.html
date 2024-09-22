@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Agenda</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background-image: url("{{ url_for('static', filename='agenda.jpg') }}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .event-container {
+            background-color: rgba(0, 0, 0, 0.7); 
+            color: white;
+            width: 100%;
+            max-width: 600px; 
+            margin: 0 auto; 
+            padding: 2em;
+            box-sizing: border-box;
+            border-radius: 10px; 
+        }
+        
+        .event-details {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .event-form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 1em;
+        }
+        
+        .form-group label {
+            display: block;
+            text-align: left;
+            margin-bottom: .8em;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="url"] {
+            width: 100%;
+            padding: .5em;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            color: white;
+            background-color: blue; 
+            font-size: 1em; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: darkblue; 
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="event-container">
+        <div class="event-details">
+            <h2>New Agenda</h2>
+            <form action="{{ url_for('new_agenda') }}" method="post" class="event-form">
+                <div class="form-group">
+                    <label for="title">Titel van de Agenda:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="url_name">URL Naam:</label>
+                    <input type="text" id="url_name" name="url_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="external_stylesheet">Style Sheet URL (optioneel):</label>
+                    <input type="url" id="external_stylesheet" name="external_stylesheet">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Aanmaken</button>
+                </div>
+            </form>
+            <a href="{{ url_for('home') }}" class="btn">Terug naar Home</a>
+        </div>
+    </div>
+</body>
+</html>

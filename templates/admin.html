@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1, h2 {
+            color: #333;
+        }
+        
+        form {
+            background: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 8px;
+            margin-bottom: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+            background-color: #4cae4c;
+        }
+        
+        .user-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .user-list li {
+            background: white;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .user-list form {
+            margin: 0;
+        }
+        
+        input[type=checkbox] {
+            margin-left: 10px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #0275d8;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        
+        a:hover {
+            background-color: #025aa5;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <h2>Create New User</h2>
+    <form action="{{ url_for('create_user') }}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="screen_name">Screen Name:</label>
+        <input type="text" id="screen_name" name="screen_name" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <label for="is_admin">Is Admin:</label>
+        <input type="checkbox" id="is_admin" name="is_admin"><br>
+
+        <input type="submit" value="Create User">
+    </form>
+
+    <h2>Existing Users</h2>
+    <ul class="user-list">
+        {% for user in users %}
+        <li>
+            {{ user.username }} ({{ user.screen_name }})
+            form action="{{ url_for('delete_user', user_id=user.id) }}" method="post" style="display: inline;">
+            <form action="{{ url_for('delete_user', user_id=user.id) }}" method="post">
+                <input type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+            </form>        
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>

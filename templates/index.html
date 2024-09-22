@@ -1,1 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVENEMENTEN AGENDA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; 
+        }
+    
+        header {
+            position: relative;
+            text-align: center;
+        }
+    
+        header img {
+            width: 100%;
+            height: auto;
+        }
+    
+        .title-container {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%);
+            color: rgba(52, 8, 8, 0.884);
+            font-size: 3em; 
+            font-weight: bold; 
+        }
+    
+        .btn, .agenda-link {
+            display: inline-block;
+            background-color: rgba(243, 238, 238, 0.453); 
+            color: rgba(199, 19, 19, 0.884);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    
+        .btn:hover, .agenda-link:hover {
+            background-color: #0056b3;
+        }
+        
+        .agenda-box {
+           position: absolute;
+           top: 50%; 
+           left: 50%;
+           transform: translate(-50%, -50%);
+           background-color: rgba(255, 255, 255, 0.5); 
+           padding: 20px;
+           border-radius: 10px;
+           text-align: center;
+           width: 80%; 
+           max-width: 1500px; 
+           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    
+        #agenda-links {
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            font-size: 1.5em;
+            padding: 0;
+            list-style: none;
+            margin: 0; 
+            flex-wrap: wrap; 
 
+        }
+
+        #agenda-links li {
+            margin: 0 10px; 
+
+        }
+
+        #new-agenda-link {
+            background: none;
+            border: none;
+            color: #090de4;
+            font-size: 1.5em;
+            padding: 10px 20px;
+            margin-top: 10px; 
+        }    
+
+        #new-agenda-link:hover {
+            background-color: #f3f4f5;
+        }
+    
+
+        .top-left-links {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+
+        }
+    
+        .top-left-links a {
+            display: inline-block;
+            background-color: rgba(243, 238, 238, 0.453); 
+            color: rgba(21, 28, 246, 0.884);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    
+        .top-left-links a:hover {
+            background-color: #f3f4f5;
+
+        }
+    
+      
+        .top-right-links {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        
+        .top-right-links a {
+            display: inline-block;
+            background-color: rgba(243, 238, 238, 0.453); 
+            font-weight: bold;
+            color: rgba(4, 4, 4, 0.988);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .top-right-links a:hover {
+            background-color: #f3f4f5;
+
+        }
+        
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div class="top-left-links">
+            {% if current_user.is_authenticated and current_user.is_admin %}
+                <a href="{{ url_for('admin') }}" class="btn">Admin</a>
+            {% endif %}
+        </div>
+        <div class="top-right-links">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+        </div>
+        <img src="{{ url_for('static', filename='background.jpg') }}" alt=""/>
+        <div class="title-container">
+            <h1>EVENEMENTEN AGENDA</h1>
+        </div>
+        <div class="agenda-box">
+            <ul id="agenda-links">
+                {% for agenda in agendas %}
+                    <li>
+                        <a href="{{ url_for('agenda', url_name=agenda.url_name) }}" class="agenda-link">{{ agenda.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <a href="{{ url_for('new_agenda') }}" class="btn" id="new-agenda-link">Add Agenda</a>
+        </div>
+    </header>
+</body>
+
+</html>

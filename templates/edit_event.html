@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Event - {{ event.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Arial', sans-serif;
+        background: url("{{ url_for('static', filename='edit_event.jpg') }}") no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+    }
+
+    .edit-event-container {
+        background: rgba(255, 255, 255, 0.9); 
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        width: 90%;
+        max-width: 600px;
+        margin: 20px;
+        }
+    
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+    
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    
+        input[type=text],
+        input[type=date],
+        input[type=time],
+        textarea {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+    
+        textarea {
+            resize: vertical;
+        }
+    
+        button {
+            background: #5cb85c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    
+        button:hover {
+            background: #4cae4c;
+        }
+    
+        .back-link {
+            text-decoration: none;
+            color: #337ab7;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="edit-event-container">
+       <h1>Edit Event: {{ event.name }}</h1>
+          <form method="post" action="{{ url_for('edit_event', event_id=event.id) }}">
+              <label for="name">Event Name:</label>
+              <input type="text" id="name" name="name" value="{{ event.name }}" required>
+      
+              <label for="event_date">Date:</label>
+              <input type="date" id="event_date" name="event_date" value="{{ event.event_date }}" required>
+      
+              <label for="start_time">Start Time:</label>
+              <input type="time" id="start_time" name="start_time" value="{{ event.start_time }}" required>
+      
+              <label for="end_time">End Time:</label>
+              <input type="time" id="end_time" name="end_time" value="{{ event.end_time }}" required>
+      
+              <label for="location">Location:</label>
+              <input type="text" id="location" name="location" value="{{ event.location }}" required>
+      
+              <label for="description">Description:</label>
+              <textarea id="description" name="description" required>{{ event.description }}</textarea>
+      
+              <button type="submit">Update Event</button>
+          </form>
+        <a href="{{ url_for('agenda', url_name=agenda.url_name) }}" class="back-link">Back</a>
+    <div>
+</body>
+</html>

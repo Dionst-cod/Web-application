@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Event</title>
+    <style>
+        body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        align-items: center; /* This aligns the container vertically in the center */
+        justify-content: center; /* This aligns the container horizontally in the center */
+        font-family: 'Arial', sans-serif;
+        background: url("{{ url_for('static', filename='edit_event.jpg') }}") no-repeat center center fixed;
+        background-size: cover;
+
+    }
+
+    .new-event-form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%; /* Allows the container to be as wide as 90% of its parent */
+        max-width: 2000px; /* You can increase this value to allow more width */
+        margin: 0 auto; /* Keeps the container centered */
+        box-sizing: border-box;
+    }
+
+    /* Additional form styling */
+    label {
+        margin-top: 10px;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    a.back-link {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a.back-link:hover {
+        text-decoration: underline;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="new-event-form">
+       <h1>Add a New Event</h1>
+       <form method="post">
+           <label for="name">Event Name:</label>
+           <input type="text" id="name" name="name" required><br>
+   
+           <label for="event_date">Event Date:</label>
+           <input type="date" id="event_date" name="event_date" required><br>
+   
+           <label for="start_time">Start Time:</label>
+           <input type="time" id="start_time" name="start_time" required><br>
+   
+           <label for="end_time">End Time:</label>
+           <input type="time" id="end_time" name="end_time" required><br>
+   
+           <label for="location">Location:</label>
+           <input type="text" id="location" name="location" required><br>
+   
+           <label for="description">Description:</label>
+           <textarea id="description" name="description" required></textarea><br>
+   
+           <input type="submit" value="Add Event">
+       </form>
+       <a href="{{ url_for('agenda', url_name=agenda.url_name) }}" class="back-link">Back</a>
+    <div>
+</body>
+</html>
